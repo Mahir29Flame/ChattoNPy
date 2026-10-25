@@ -1,10 +1,12 @@
 # ChattoNPy
-### A simple python CLI chat interface for Gemini API
+#### *A simple python CLI chat interface and module for Gemini API*
 
 ## Installation
 
+### Install as a CLI Tool
+
 ```bash
-pip install ChattoNPy
+pipx install ChattoNPy
 ```
 
 or via UV:
@@ -13,8 +15,21 @@ or via UV:
 uv tool install ChattoNPy
 ```
 
+### Install as a Module
+
+```bash
+pip install ChattoNPy
+```
+
+or via UV:
+
+```bash
+uv add ChattoNPy
+```
+
 ## Usage
 
+### CLI 
 Set the API key as an environment variable:
 
 ```powershell
@@ -30,4 +45,17 @@ Then run the tool:
 
 ```bash
 ChattoNPy
+```
+
+### Module
+
+```python
+from chattonpy import generate
+import os
+
+response = generate("Tell me a joke", os.environ.get("GEMINI_API_KEY"))
+print(response)
+
+response = generate("Tell me a joke", os.environ.get("GEMINI_API_KEY"))
+print(response)
 ```

@@ -1,3 +1,3 @@
-from .main import generate as ChattoNPY
+from .main import generate, ChattoNPY
 
-__all__ = ["ChattoNPY"]
+__all__ = ["generate", "ChattoNPY"]

@@ -4,8 +4,8 @@ build-backend = "hatchling.build"
 
 [project]
 name = "chattonpy"
-version = "1.2.0"
-description = "A simple python CLI chat interface for Gemini API"
+version = "1.2.5"
+description = "A simple python CLI chat interface and a python module for Gemini API"
 readme = "README.md"
 requires-python = ">=3.11"
 dependencies = [

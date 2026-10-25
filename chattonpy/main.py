@@ -6,11 +6,11 @@ from google import genai
 from google.genai import types
 from typing import List
 
-history = []
-
-def generate(text: str, history):
+def generate(text: str, api_key: str, history: list | None = None):
+    if history is None:
+        history = []
     client = genai.Client(
-        api_key=os.environ.get("GEMINI_API_KEY"),
+        api_key=api_key,
     )
 
     model = "gemini-3.5-flash-lite"
@@ -49,6 +49,8 @@ def generate(text: str, history):
 
     return "".join(full_response)
 
+ChattoNPY = generate
+
 def cli():
     """CLI entrypoint for ChattoNPy."""
     while True:
@@ -57,7 +59,7 @@ def cli():
             if user_input.strip() in ("/quit()"):
                 break
             print("\nAI> ")
-            output = generate(user_input, history)
+            output = generate(user_input, os.environ.get("GEMINI_API_KEY"), history)
             history.append(f"\nUser: {user_input}\nAI: {output}")
             print()
         except (KeyboardInterrupt, EOFError):
