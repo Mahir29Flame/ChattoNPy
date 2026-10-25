@@ -1,0 +1,9 @@
+[project]
+name = "ChattoNPy"
+version = "1.0.0"
+description = "A simple Gemini API wrapper for Python"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "google-genai"
+]
