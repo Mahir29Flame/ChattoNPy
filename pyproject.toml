@@ -1,9 +1,17 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
 [project]
-name = "ChattoNPy"
-version = "1.0.0"
-description = "A simple Gemini API wrapper for Python"
+name = "chattonpy"
+version = "1.2.0"
+description = "A simple python CLI chat interface for Gemini API"
 readme = "README.md"
 requires-python = ">=3.11"
 dependencies = [
-    "google-genai"
+    "google-genai",
 ]
+
+# This creates the command in the terminal!
+[project.scripts]
+ChattoNPy = "chattonpy.main:cli"

@@ -4,9 +4,11 @@
 import os
 from google import genai
 from google.genai import types
+from typing import List
 
+history = []
 
-def generate(text: str):
+def generate(text: str, history):
     client = genai.Client(
         api_key=os.environ.get("GEMINI_API_KEY"),
     )
@@ -25,6 +27,7 @@ def generate(text: str):
         types.Tool(url_context=types.UrlContext()),
     ]
     generate_content_config = types.GenerateContentConfig(
+        system_instruction=f"You are a helpful assistant.\nHistory:\n{''.join(history)}",
         thinking_config=types.ThinkingConfig(
             thinking_level="MEDIUM",
         ),
@@ -33,20 +36,33 @@ def generate(text: str):
         tools=tools,
     )
 
-    print("")
-
+    full_response = []
     for chunk in client.models.generate_content_stream(
         model=model,
         contents=contents,
         config=generate_content_config,
     ):
-        if text := chunk.text:
-            print(text)
+        if chunk.text:
+            print(chunk.text, end="", flush=True)
+            full_response.append(chunk.text)
+    print()
+
+    return "".join(full_response)
+
+def cli():
+    """CLI entrypoint for ChattoNPy."""
+    while True:
+        try:
+            user_input = input("You> ")
+            if user_input.strip() in ("/quit()"):
+                break
+            print("\nAI> ")
+            output = generate(user_input, history)
+            history.append(f"\nUser: {user_input}\nAI: {output}")
+            print()
+        except (KeyboardInterrupt, EOFError):
+            print("\nExiting...")
+            break
 
 if __name__ == "__main__":
-    while True:
-        user_input = input("You> ")
-        if user_input == "/quit()":
-            break
-        generate(user_input)
-        print("\n")
+    cli()
