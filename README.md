@@ -1,5 +1,6 @@
 # ChattoNPy
 #### *A simple python CLI chat interface and module for Gemini API*
+[![PyPI Downloads](https://static.pepy.tech/personalized-badge/chattonpy?period=total&units=INTERNATIONAL_SYSTEM&left_color=BLACK&right_color=GREEN&left_text=Downloads)](https://pepy.tech/projects/chattonpy)
 
 ## Installation
 
